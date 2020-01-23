@@ -25,9 +25,9 @@ public class AgendaRepository {
         }
     }
 
-    public void updateContact(UpdateAgendaRequest request) throws IOException, SQLException {
+    public void updateContact(long id, UpdateAgendaRequest request) throws IOException, SQLException {
 
-        String sql = "UPDATE agenda SET first_name=?, last_name=?, phone_number=?";
+        String sql = "UPDATE agenda SET first_name=?, last_name=?, phone_number=? WHERE id = ?";
 
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -35,6 +35,7 @@ public class AgendaRepository {
             preparedStatement.setString(1, request.getFirst_name());
             preparedStatement.setString(2, request.getLast_name());
             preparedStatement.setString(3, request.getPhone_number());
+            preparedStatement.setLong(4, id);
 
             preparedStatement.executeUpdate();
         }
