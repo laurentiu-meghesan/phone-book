@@ -1,12 +1,13 @@
 package org.fasttrackit.persistence;
 
+import org.fasttrackit.domain.Agenda;
 import org.fasttrackit.transfer.CreateAgendaRequest;
 import org.fasttrackit.transfer.UpdateAgendaRequest;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AgendaRepository {
 
@@ -63,6 +64,28 @@ public class AgendaRepository {
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    public List<Agenda> getAgenda() throws IOException, SQLException {
+        String sql = "SELECT id,first_name,last_name,phone_number FROM agenda";
+        try (Connection connection = DatabaseConfiguration.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            List<Agenda> contacts = new ArrayList<>();
+
+            while (resultSet.next()){
+                 Agenda agenda = new Agenda();
+                 agenda.setId(resultSet.getLong("id"));
+                 agenda.setFirst_name(resultSet.getString("first_name"));
+                 agenda.setLast_name(resultSet.getString("last_name"));
+                 agenda.setPhone_number(resultSet.getString("phone_number"));
+
+                 contacts.add(agenda);
+            }
+            return contacts;
+        }
+
     }
 
 }
