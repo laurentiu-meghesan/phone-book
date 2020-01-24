@@ -53,4 +53,16 @@ public class AgendaRepository {
             preparedStatement.executeUpdate();
         }
     }
+
+    public void deleteAllContacts() throws IOException, SQLException {
+
+        String sql = "TRUNCATE TABLE agenda";
+
+        try (Connection connection = DatabaseConfiguration.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
 }
