@@ -102,8 +102,8 @@ public class App {
             System.out.println("Contact number " + id + " has been updated to:");
             System.out.println(id + "." + first_name + " " + last_name + " " + phone_number + ".");
         } else {
-            System.out.println("Thank you!");*/
-        }
+            System.out.println("Thank you!");
+        }*/
 
 //        Delete contact
 
