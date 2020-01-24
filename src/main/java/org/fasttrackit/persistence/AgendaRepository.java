@@ -40,4 +40,17 @@ public class AgendaRepository {
             preparedStatement.executeUpdate();
         }
     }
+
+    public void deleteContact(long id) throws IOException, SQLException {
+
+        String sql = "DELETE FROM agenda WHERE id = ?";
+
+        try (Connection connection = DatabaseConfiguration.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
+        }
+    }
 }
