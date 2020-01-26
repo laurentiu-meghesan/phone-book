@@ -1,11 +1,13 @@
 package org.fasttrackit;
 
+import org.fasttrackit.domain.Agenda;
 import org.fasttrackit.persistence.AgendaRepository;
 import org.fasttrackit.transfer.CreateAgendaRequest;
 import org.fasttrackit.transfer.UpdateAgendaRequest;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -177,6 +179,10 @@ public class App {
                 System.out.println("Thank you!");
             }
         }
+
+//        View Agenda
+        List<Agenda> agenda = agendaRepository.getAgenda();
+        System.out.println(agenda);
 
     }
 }
