@@ -90,13 +90,13 @@ public class AgendaRepository {
     }
 
     public List<Agenda> searchContact(SearchAgendaRequest request) throws IOException, SQLException {
-        String sql = "SELECT id, first_name, last_name, phone_number FROM agenda WHERE first_name LIKE ? ";
-//                " OR last_name LIKE ?";
+        String sql = "SELECT id, first_name, last_name, phone_number FROM agenda " +
+                "WHERE first_name LIKE ?  OR last_name LIKE ?";
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, request.getPattern());
-//            preparedStatement.setString(2,"%" + request.getPattern() + "%");
+            preparedStatement.setString(2, request.getPattern());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

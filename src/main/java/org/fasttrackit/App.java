@@ -13,8 +13,9 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws IOException, SQLException {
-        System.out.println("Welcome to the phone book!");
-        System.out.println("--------------------------");
+        System.out.println("\n***** Welcome to the phone book! *****\n");
+        System.out.println("        ****[Main Menu]****    ");
+        System.out.println("--------------------------------------");
 
         AgendaRepository agendaRepository = new AgendaRepository();
         boolean flag;
