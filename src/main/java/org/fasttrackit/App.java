@@ -268,7 +268,7 @@ public class App {
 
                     if (agenda2 != null) {
                         System.out.println(agenda2);
-                    } else if (agenda2 == null) {
+                    } else if (agenda2.isEmpty()) {
                         System.out.println("No matches found.");
                     }
 
