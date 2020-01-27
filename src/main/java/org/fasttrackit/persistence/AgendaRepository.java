@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AgendaRepository {
 
@@ -89,12 +90,13 @@ public class AgendaRepository {
     }
 
     public List<Agenda> searchContact(SearchAgendaRequest request) throws IOException, SQLException {
-        String sql = "SELECT id,first_name,last_name,phone_number FROM agenda WHERE first_name LIKE \"%?%\"" +
-                " OR last_name LIKE \"%?%\"";
+        String sql = "SELECT id, first_name, last_name, phone_number FROM agenda WHERE first_name LIKE ?";
+//                " OR last_name LIKE ?";
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, request.getPattern());
+//            preparedStatement.setString(2,"%" + request.getPattern() + "%");
 
             ResultSet resultSet = preparedStatement.executeQuery(sql);
 
@@ -111,5 +113,26 @@ public class AgendaRepository {
             }
             return contacts1;
         }
+    }
+
+    public boolean continueMakingOperations() {
+
+        System.out.println("Do you want to make another operation? Type y for yes, n for no.");
+        boolean flag = false, flag1 = false;
+        do {
+            Scanner scanner15 = new Scanner(System.in);
+            String check2 = scanner15.nextLine();
+            if (check2.charAt(0) == 'y' | check2.charAt(0) == 'Y') {
+                flag = true;
+                flag1 = true;
+            } else if (check2.charAt(0) == 'n' | check2.charAt(0) == 'N') {
+                flag = true;
+                flag1 = false;
+                System.out.println("Thank you! Goodbye.");
+            } else {
+                System.out.println("Please type y or n!");
+            }
+        } while (!flag);
+        return flag1;
     }
 }
