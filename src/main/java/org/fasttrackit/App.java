@@ -44,13 +44,13 @@ public class App {
                     CreateAgendaRequest request = new CreateAgendaRequest();
 
                     boolean flag1 = false;
-                    String phone_number;
+                    String phoneNumber;
                     do {
                         System.out.println("Phone number:");
                         Scanner scanner = new Scanner(System.in);
-                        phone_number = scanner.nextLine();
-                        char[] ch = phone_number.toCharArray();
-                        if (Character.isDigit(ch[0]) | phone_number.charAt(0) == '+') {
+                        phoneNumber = scanner.nextLine();
+                        char[] ch = phoneNumber.toCharArray();
+                        if (Character.isDigit(ch[0]) | phoneNumber.charAt(0) == '+') {
                             flag1 = true;
                         } else {
                             System.out.println("You entered an invalid number. Please try again:");
@@ -59,20 +59,20 @@ public class App {
 
                     System.out.println("First name:");
                     Scanner scanner1 = new Scanner(System.in);
-                    String first_name = scanner1.nextLine();
+                    String firstName = scanner1.nextLine();
 
                     System.out.println("Last name: ");
                     Scanner scanner2 = new Scanner(System.in);
-                    String last_name = scanner2.nextLine();
+                    String lastName = scanner2.nextLine();
 
-                    request.setPhone_number(phone_number);
-                    request.setFirst_name(first_name);
-                    request.setLast_name(last_name);
+                    request.setPhoneNumber(phoneNumber);
+                    request.setFirstName(firstName);
+                    request.setLastName(lastName);
 
                     agendaRepository.createContact(request);
-                    System.out.println("Contact " + request.getFirst_name() + " " +
-                            request.getLast_name() + " with phone number " +
-                            request.getPhone_number() + " has been created.");
+                    System.out.println("Contact " + request.getFirstName() + " " +
+                            request.getLastName() + " with phone number " +
+                            request.getPhoneNumber() + " has been created.");
 
                     flag = agendaRepository.continueMakingOperations();
                     break;
@@ -138,9 +138,9 @@ public class App {
                             }
                         } while (!flag3);
 
-                        request1.setPhone_number(phone_number1);
-                        request1.setFirst_name(first_name1);
-                        request1.setLast_name(last_name1);
+                        request1.setPhoneNumber(phone_number1);
+                        request1.setFirstName(first_name1);
+                        request1.setLastName(last_name1);
 
                         agendaRepository.updateContact(id, request1);
                         System.out.println("Contact number " + id + " has been updated to:");

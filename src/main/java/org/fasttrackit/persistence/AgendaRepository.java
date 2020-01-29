@@ -20,9 +20,9 @@ public class AgendaRepository {
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setString(1, request.getFirst_name());
-            preparedStatement.setString(2, request.getLast_name());
-            preparedStatement.setString(3, request.getPhone_number());
+            preparedStatement.setString(1, request.getFirstName());
+            preparedStatement.setString(2, request.getLastName());
+            preparedStatement.setString(3, request.getPhoneNumber());
 
             preparedStatement.executeUpdate();
         }
@@ -35,9 +35,9 @@ public class AgendaRepository {
         try (Connection connection = DatabaseConfiguration.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setString(1, request.getFirst_name());
-            preparedStatement.setString(2, request.getLast_name());
-            preparedStatement.setString(3, request.getPhone_number());
+            preparedStatement.setString(1, request.getFirstName());
+            preparedStatement.setString(2, request.getLastName());
+            preparedStatement.setString(3, request.getPhoneNumber());
             preparedStatement.setLong(4, id);
 
             preparedStatement.executeUpdate();
@@ -79,9 +79,9 @@ public class AgendaRepository {
             while (resultSet.next()) {
                 Agenda agenda = new Agenda();
                 agenda.setId(resultSet.getLong("id"));
-                agenda.setFirst_name(resultSet.getString("first_name"));
-                agenda.setLast_name(resultSet.getString("last_name"));
-                agenda.setPhone_number(resultSet.getString("phone_number"));
+                agenda.setFirstName(resultSet.getString("first_name"));
+                agenda.setLastName(resultSet.getString("last_name"));
+                agenda.setPhoneNumber(resultSet.getString("phone_number"));
 
                 contacts.add(agenda);
             }
@@ -105,9 +105,9 @@ public class AgendaRepository {
             while (resultSet.next()) {
                 Agenda agenda = new Agenda();
                 agenda.setId(resultSet.getLong("id"));
-                agenda.setFirst_name(resultSet.getString("first_name"));
-                agenda.setLast_name(resultSet.getString("last_name"));
-                agenda.setPhone_number(resultSet.getString("phone_number"));
+                agenda.setFirstName(resultSet.getString("first_name"));
+                agenda.setLastName(resultSet.getString("last_name"));
+                agenda.setPhoneNumber(resultSet.getString("phone_number"));
 
                 contacts1.add(agenda);
             }
