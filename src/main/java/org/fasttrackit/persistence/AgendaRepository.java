@@ -57,16 +57,18 @@ public class AgendaRepository {
         }
     }
 
-    public void deleteContacts(long id) throws IOException, SQLException {
+    public void deleteContacts(List<Long> idList) throws IOException, SQLException {
 
-        String sql = "DELETE FROM agenda WHERE id = ?";
+        for (int i = 0; i < idList.size(); i++) {
+            String sql = "DELETE FROM agenda WHERE id = ?";
 
-        try (Connection connection = DatabaseConfiguration.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            try (Connection connection = DatabaseConfiguration.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setLong(1, id);
+                preparedStatement.setLong(1, idList.get(i));
 
-            preparedStatement.executeUpdate();
+                preparedStatement.executeUpdate();
+            }
         }
     }
 

@@ -8,6 +8,7 @@ import org.fasttrackit.transfer.UpdateContactRequest;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -218,6 +219,23 @@ public class App {
                         } else {
                             System.out.println("Thank you!");
                         }
+                    } else if (choice == 2) {
+                        System.out.println("How many contacts do you want to delete?");
+                        Scanner scanner = new Scanner(System.in);
+                        int nrContactsToBeDeleted = scanner.nextInt();
+                        scanner.nextLine();
+
+                        System.out.println("Enter the IDs of the " + nrContactsToBeDeleted +
+                                " contacts you want to delete: ");
+
+                        List<Long> idList = new ArrayList<>();
+                        for (int i = 0; i<nrContactsToBeDeleted; i++){
+                            Scanner scanner1 = new Scanner(System.in);
+                            idList.add(scanner1.nextLong());
+                        }
+                        agendaRepository.deleteContacts(idList);
+                        System.out.println("Contacts with IDs " + idList + " have been deleted. Thank you!");
+
                     } else if (choice == 3) {
                         System.out.println("Are you sure that you want to delete entire agenda?");
                         System.out.println("Type y for \"yes\" or n for \"no\":");
