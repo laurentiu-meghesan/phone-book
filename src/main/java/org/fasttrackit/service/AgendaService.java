@@ -2,9 +2,9 @@ package org.fasttrackit.service;
 
 import org.fasttrackit.domain.Agenda;
 import org.fasttrackit.persistence.AgendaRepository;
-import org.fasttrackit.transfer.CreateAgendaRequest;
-import org.fasttrackit.transfer.SearchAgendaRequest;
-import org.fasttrackit.transfer.UpdateAgendaRequest;
+import org.fasttrackit.transfer.CreateContactRequest;
+import org.fasttrackit.transfer.GetContactRequest;
+import org.fasttrackit.transfer.UpdateContactRequest;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,13 +14,13 @@ public class AgendaService {
 
     private AgendaRepository agendaRepository = new AgendaRepository();
 
-    public void createContact(CreateAgendaRequest request) throws IOException, SQLException {
+    public void createContact(CreateContactRequest request) throws IOException, SQLException {
         System.out.println("Creating contact : " + request);
 
         agendaRepository.createContact(request);
     }
 
-    public void updateContact(long id, UpdateAgendaRequest request) throws IOException, SQLException {
+    public void updateContact(long id, UpdateContactRequest request) throws IOException, SQLException {
         System.out.println("Updating task " + id + ": " + request);
 
         agendaRepository.updateContact(id, request);
@@ -40,11 +40,11 @@ public class AgendaService {
 
     public List<Agenda> getContacts() throws IOException, SQLException {
         System.out.println("Retrieving all contacts.");
-        return agendaRepository.getAgenda();
+        return agendaRepository.getContacts();
     }
 
-    public List<Agenda> searchContact(SearchAgendaRequest request) throws IOException, SQLException {
+    public Agenda searchContact(GetContactRequest request) throws IOException, SQLException {
         System.out.println("Searching contact after pattern " + request.getPattern() + ".");
-        return agendaRepository.searchContact(request);
+        return agendaRepository.getContact(request);
     }
 }

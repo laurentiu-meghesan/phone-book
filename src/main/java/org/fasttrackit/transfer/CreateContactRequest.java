@@ -1,20 +1,10 @@
 package org.fasttrackit.transfer;
 
-public class SearchAgendaRequest {
+public class CreateContactRequest {
 
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private String pattern;
-
-
-    public String getPattern() {
-        return pattern;
-    }
-
-    public void setPattern(String pattern) {
-        this.pattern = pattern;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -42,11 +32,10 @@ public class SearchAgendaRequest {
 
     @Override
     public String toString() {
-        return "SearchAgendaRequest{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", pattern='" + pattern + '\'' +
+        return "CreateAgendaRequest{" +
+                "first_name='" + firstName + '\'' +
+                ", last_name='" + lastName + '\'' +
+                ", phone_number='" + phoneNumber + '\'' +
                 '}';
     }
 }

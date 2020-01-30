@@ -2,7 +2,7 @@ package org.fasttrackit.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fasttrackit.service.AgendaService;
-import org.fasttrackit.transfer.CreateAgendaRequest;
+import org.fasttrackit.transfer.CreateContactRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ public class AgendaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        CreateAgendaRequest request = new ObjectMapper().readValue(req.getReader(),CreateAgendaRequest.class);
+        CreateContactRequest request = new ObjectMapper().readValue(req.getReader(), CreateContactRequest.class);
 
         try {
             agendaService.createContact(request);

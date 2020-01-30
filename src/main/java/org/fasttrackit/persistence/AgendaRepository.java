@@ -1,9 +1,9 @@
 package org.fasttrackit.persistence;
 
 import org.fasttrackit.domain.Agenda;
-import org.fasttrackit.transfer.CreateAgendaRequest;
-import org.fasttrackit.transfer.SearchAgendaRequest;
-import org.fasttrackit.transfer.UpdateAgendaRequest;
+import org.fasttrackit.transfer.CreateContactRequest;
+import org.fasttrackit.transfer.GetContactRequest;
+import org.fasttrackit.transfer.UpdateContactRequest;
 
 import java.io.IOException;
 import java.sql.*;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class AgendaRepository {
 
-    public void createContact(CreateAgendaRequest request) throws IOException, SQLException {
+    public void createContact(CreateContactRequest request) throws IOException, SQLException {
 
         String sql = "INSERT INTO agenda (first_name,last_name,phone_number) VALUES (?,?,?) ";
 
@@ -28,7 +28,7 @@ public class AgendaRepository {
         }
     }
 
-    public void updateContact(long id, UpdateAgendaRequest request) throws IOException, SQLException {
+    public void updateContact(long id, UpdateContactRequest request) throws IOException, SQLException {
 
         String sql = "UPDATE agenda SET first_name=?, last_name=?, phone_number=? WHERE id = ?";
 
@@ -57,6 +57,19 @@ public class AgendaRepository {
         }
     }
 
+    public void deleteContacts(long id) throws IOException, SQLException {
+
+        String sql = "DELETE FROM agenda WHERE id = ?";
+
+        try (Connection connection = DatabaseConfiguration.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
     public void deleteAllContacts() throws IOException, SQLException {
 
         String sql = "TRUNCATE TABLE agenda";
@@ -68,13 +81,13 @@ public class AgendaRepository {
         }
     }
 
-    public List<Agenda> getAgenda() throws IOException, SQLException {
+    public List<Agenda> getContacts() throws IOException, SQLException {
         String sql = "SELECT id,first_name,last_name,phone_number FROM agenda";
         try (Connection connection = DatabaseConfiguration.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
 
-            List<Agenda> contacts = new ArrayList<>();
+            List<Agenda> contactsList = new ArrayList<>();
 
             while (resultSet.next()) {
                 Agenda agenda = new Agenda();
@@ -83,13 +96,13 @@ public class AgendaRepository {
                 agenda.setLastName(resultSet.getString("last_name"));
                 agenda.setPhoneNumber(resultSet.getString("phone_number"));
 
-                contacts.add(agenda);
+                contactsList.add(agenda);
             }
-            return contacts;
+            return contactsList;
         }
     }
 
-    public List<Agenda> searchContact(SearchAgendaRequest request) throws IOException, SQLException {
+    public Agenda getContact(GetContactRequest request) throws IOException, SQLException {
         String sql = "SELECT id, first_name, last_name, phone_number FROM agenda " +
                 "WHERE first_name LIKE ?  OR last_name LIKE ?";
         try (Connection connection = DatabaseConfiguration.getConnection();
@@ -100,18 +113,14 @@ public class AgendaRepository {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<Agenda> contacts1 = new ArrayList<>();
-
+            Agenda agenda = new Agenda();
             while (resultSet.next()) {
-                Agenda agenda = new Agenda();
                 agenda.setId(resultSet.getLong("id"));
                 agenda.setFirstName(resultSet.getString("first_name"));
                 agenda.setLastName(resultSet.getString("last_name"));
                 agenda.setPhoneNumber(resultSet.getString("phone_number"));
-
-                contacts1.add(agenda);
             }
-            return contacts1;
+            return agenda;
         }
     }
 

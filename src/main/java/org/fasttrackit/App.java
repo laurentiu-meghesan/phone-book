@@ -2,9 +2,9 @@ package org.fasttrackit;
 
 import org.fasttrackit.domain.Agenda;
 import org.fasttrackit.persistence.AgendaRepository;
-import org.fasttrackit.transfer.CreateAgendaRequest;
-import org.fasttrackit.transfer.SearchAgendaRequest;
-import org.fasttrackit.transfer.UpdateAgendaRequest;
+import org.fasttrackit.transfer.CreateContactRequest;
+import org.fasttrackit.transfer.GetContactRequest;
+import org.fasttrackit.transfer.UpdateContactRequest;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class App {
                 case 1: {
                     //        Create contact
                     System.out.println("Enter contact details");
-                    CreateAgendaRequest request = new CreateAgendaRequest();
+                    CreateContactRequest request = new CreateContactRequest();
 
                     boolean flag1 = false;
                     String phoneNumber;
@@ -80,13 +80,13 @@ public class App {
 
                 case 4: {
                     //        Update contact
-                    UpdateAgendaRequest request1;
+                    UpdateContactRequest request1;
                     long id = 0;
                     boolean flag4;
 
                     do {
                         System.out.println("Which contact ID do you want to update?");
-                        request1 = new UpdateAgendaRequest();
+                        request1 = new UpdateContactRequest();
                         try {
                             Scanner scanner3 = new Scanner(System.in);
                             id = scanner3.nextLong();
@@ -156,7 +156,8 @@ public class App {
                 case 5: {
                     //        Delete contact
                     System.out.println("What do you want to delete?");
-                    System.out.println("Delete one contact (type 1) or delete all contacts (type 2)?");
+                    System.out.println("Delete one contact (type 1), delete more contacts at once (type 2)" +
+                            " or delete all contacts (type 3)?");
 
                     boolean flag1 = false;
                     int choice = 0;
@@ -217,7 +218,7 @@ public class App {
                         } else {
                             System.out.println("Thank you!");
                         }
-                    } else if (choice == 2) {
+                    } else if (choice == 3) {
                         System.out.println("Are you sure that you want to delete entire agenda?");
                         System.out.println("Type y for \"yes\" or n for \"no\":");
 
@@ -249,7 +250,7 @@ public class App {
 
                 case 2: {
                     //        View Agenda
-                    List<Agenda> agenda = agendaRepository.getAgenda();
+                    List<Agenda> agenda = agendaRepository.getContacts();
                     System.out.println(agenda);
 
                     flag = agendaRepository.continueMakingOperations();
@@ -257,24 +258,25 @@ public class App {
                 }
 
                 case 3: {
-                    //         Search a contact by pattern
-                    System.out.println("Enter a pattern to search in agenda:");
+                    //         Search a contact by name or surname
+                    System.out.println("Enter the name or surname of the contact you" +
+                            "want to search for:");
                     Scanner scanner12 = new Scanner(System.in);
-                    String pattern = "%" + scanner12.nextLine() + "%";
+                    String pattern = scanner12.nextLine();
 
-                    SearchAgendaRequest request2 = new SearchAgendaRequest();
+                    GetContactRequest request2 = new GetContactRequest();
                     request2.setPattern(pattern);
-                    List<Agenda> agenda2 = agendaRepository.searchContact(request2);
 
-                    if (agenda2 != null) {
-                        System.out.println(agenda2);
-                    } else if (agenda2.isEmpty()) {
+                    Agenda contact = agendaRepository.getContact(request2);
+
+                    if (contact.getFirstName() == null & contact.getLastName() == null) {
                         System.out.println("No matches found.");
+                    } else {
+                        System.out.println(contact);
                     }
 
                     flag = agendaRepository.continueMakingOperations();
                     break;
-
                 }
 
                 default: {

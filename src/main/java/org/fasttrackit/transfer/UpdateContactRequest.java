@@ -1,6 +1,6 @@
 package org.fasttrackit.transfer;
 
-public class UpdateAgendaRequest {
+public class UpdateContactRequest {
 
     private String firstName;
     private String lastName;
