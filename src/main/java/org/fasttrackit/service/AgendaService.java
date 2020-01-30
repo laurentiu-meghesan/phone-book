@@ -32,6 +32,12 @@ public class AgendaService {
         agendaRepository.deleteContact(id);
     }
 
+    public void deleteContacts(List<Long> idList) throws IOException, SQLException {
+        System.out.println("Deleting contacts " + idList + ".");
+
+        agendaRepository.deleteContacts(idList);
+    }
+
     public void deleteAllContacts() throws IOException, SQLException {
         System.out.println("Deleting entire agenda.");
 
