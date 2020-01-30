@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class AgendaRepository {
 
-    public void createContact(CreateContactRequest request) throws IOException, SQLException {
+    public void createContact(CreateContactRequest request) throws IOException, SQLException, ClassNotFoundException {
 
         String sql = "INSERT INTO agenda (first_name,last_name,phone_number) VALUES (?,?,?) ";
 
@@ -28,7 +28,7 @@ public class AgendaRepository {
         }
     }
 
-    public void updateContact(long id, UpdateContactRequest request) throws IOException, SQLException {
+    public void updateContact(long id, UpdateContactRequest request) throws IOException, SQLException, ClassNotFoundException {
 
         String sql = "UPDATE agenda SET first_name=?, last_name=?, phone_number=? WHERE id = ?";
 
@@ -44,7 +44,7 @@ public class AgendaRepository {
         }
     }
 
-    public void deleteContact(long id) throws IOException, SQLException {
+    public void deleteContact(long id) throws IOException, SQLException, ClassNotFoundException {
 
         String sql = "DELETE FROM agenda WHERE id = ?";
 
@@ -57,7 +57,7 @@ public class AgendaRepository {
         }
     }
 
-    public void deleteContacts(List<Long> idList) throws IOException, SQLException {
+    public void deleteContacts(List<Long> idList) throws IOException, SQLException, ClassNotFoundException {
 
         for (int i = 0; i < idList.size(); i++) {
             String sql = "DELETE FROM agenda WHERE id = ?";
@@ -72,7 +72,7 @@ public class AgendaRepository {
         }
     }
 
-    public void deleteAllContacts() throws IOException, SQLException {
+    public void deleteAllContacts() throws IOException, SQLException, ClassNotFoundException {
 
         String sql = "TRUNCATE TABLE agenda";
 
@@ -83,7 +83,7 @@ public class AgendaRepository {
         }
     }
 
-    public List<Agenda> getContacts() throws IOException, SQLException {
+    public List<Agenda> getContacts() throws IOException, SQLException, ClassNotFoundException {
         String sql = "SELECT id,first_name,last_name,phone_number FROM agenda";
         try (Connection connection = DatabaseConfiguration.getConnection();
              Statement statement = connection.createStatement();
@@ -104,7 +104,7 @@ public class AgendaRepository {
         }
     }
 
-    public Agenda getContact(GetContactRequest request) throws IOException, SQLException {
+    public Agenda getContact(GetContactRequest request) throws IOException, SQLException, ClassNotFoundException {
         String sql = "SELECT id, first_name, last_name, phone_number FROM agenda " +
                 "WHERE first_name LIKE ?  OR last_name LIKE ?";
         try (Connection connection = DatabaseConfiguration.getConnection();

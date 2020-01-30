@@ -24,7 +24,7 @@ public class AgendaServlet extends HttpServlet {
 
         try {
             agendaService.createContact(request);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             resp.sendError(500, "Internal server error: " + e.getMessage());
         }
     }

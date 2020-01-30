@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         System.out.println("\n***** Welcome to the phone book! *****\n");
         System.out.println("        ****[Main Menu]****    ");
         System.out.println("--------------------------------------");
