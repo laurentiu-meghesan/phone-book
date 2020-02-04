@@ -49,7 +49,7 @@ public class AgendaService {
         return agendaRepository.getContacts();
     }
 
-    public Agenda searchContact(GetContactRequest request) throws IOException, SQLException, ClassNotFoundException {
+    public Agenda getContact(GetContactRequest request) throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Searching contact after pattern " + request.getPattern() + ".");
         return agendaRepository.getContact(request);
     }
